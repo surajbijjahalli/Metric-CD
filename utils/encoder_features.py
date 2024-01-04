@@ -33,9 +33,10 @@ class VGG_Net(torch.nn.Module):
         self.blocks    = torch.nn.ModuleList(blocks)
 
         if fine_tune:
+            checkpoint = 'https://download.pytorch.org/models/vgg16_bn-6c64b313.pth'
             #Initialize model with VGG16 finetune on AID dataset
-            self.blocks.load_state_dict(torch.load("/media/lidan/ssd/Chaminda/change_detection/VGG_finetune_AID/saved_model/vgg16_AID_049fc.pth"), strict=False)
-
+            #self.blocks.load_state_dict(torch.load("/media/lidan/ssd/Chaminda/change_detection/VGG_finetune_AID/saved_model/vgg16_AID_049fc.pth"), strict=False)
+            self.blocks.load_state_dict(torch.hub.load_state_dict_from_url(checkpoint, progress=False))
         self.transform = torch.nn.functional.interpolate
         self.mean      = torch.nn.Parameter(torch.tensor([0.485, 0.456, 0.406], device='cuda').view(1,3,1,1))
         self.std       = torch.nn.Parameter(torch.tensor([0.229, 0.224, 0.225], device='cuda').view(1,3,1,1))
