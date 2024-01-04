@@ -13,7 +13,7 @@ from torchvision.transforms import Compose, ToTensor, Normalize
 
 #-------------- VGG Network ----------------#
 class VGG_Net(torch.nn.Module):
-    def __init__(self, resize=True, requires__grad = True, fine_tune = True): # Changed fine_tune to false
+    def __init__(self, resize=True, requires__grad = True, fine_tune = False): # Changed fine_tune to false
         super(VGG_Net, self).__init__()
         if fine_tune:
             pretrained = False
